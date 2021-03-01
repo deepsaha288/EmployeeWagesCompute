@@ -2,49 +2,60 @@ public class EmpWageproblemCompute
 
 {
 
-            public static final int isPartTime=1;
-            public static final int isFullTime=2;
-            public static final int empRatePerHr=20;
-            public static final int numOfWorkingDays=2;
-            public static final int maxHrsInMonth=10;	
+     public static final int isPartTime=1;
+     public static final int isFullTime=2;
 
-               public static void main(String[] args)
+	private final String company;
+	private final int empRatePerHour;
+	private final int numOfWorkingDays;
+	private final int maxHoursPerMonth;
 
-          {
-	      int empHrs=0;
-	      int totalEmpHrs=0;
-	      int totalWorkingDays=0;
+	public EmpWageproblem2UsingClass(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+	{
+		this.company=company;
+		this.empRatePerHour=empRatePerHour;
+		this.numOfWorkingDays=numOfWorkingDays;
+		this.maxHoursPerMonth=maxHoursPerMonth;
+	}
+	
+        private int computeWage()
+     {
+	 int empHrs=0;
+         int totalEmpHrs=0;
+         int totalWorkingDays=0;
 
-	 while(totalEmpHrs <= maxHrsInMonth && totalWorkingDays < numOfWorkingDays)
+   while(totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
+   {
+      totalWorkingDays++;
+      int empCheck=(int) Math.floor(Math.random() * 10) %3;
 
-           {
-		    totalWorkingDays++;
-		   int empCheck=(int) Math.floor(Math.random() * 10) %3;
-						
-                        switch (empCheck)
-                    
-                      {
-			  case isPartTime:
-				empHrs=4;
-				break;
-			
-                           case isFullTime:
-				empHrs=8;
-				  break;
-			      
-                                 default:
-					
-                                empHrs=0;
-	               }
-			totalEmpHrs +=empHrs;
-	System.out.println("Days: " + totalWorkingDays + "Emp Hrs: " +empHrs);
+      switch (empCheck){
+         case isPartTime:
+                     empHrs=4;
+                  break;
+         case isFullTime:
+                     empHrs=8;
+                  break;
+         default:
+               empHrs=0;
+   }
+         totalEmpHrs +=empHrs;
+         System.out.println("Days: " + totalWorkingDays + "Emp Hrs: " +empHrs);
 
-    }
-
-           int totalEmpWage=totalEmpHrs * empRatePerHr;
-           System.out.println("Total Emp Wage: " +totalEmpWage);
-
-     }
+   }
+return totalEmpHrs * empRatePerHour;
 
 }
+
+public static void main(String[] args) 
+      {
+	EmpWageproblem2UsingClass emp=new EmpWageproblem2UsingClass("Flipkart",20,2,10);
+	EmpWageproblem2UsingClass emp1=new EmpWageproblem2UsingClass("Amazon",30,3,10);
+	System.out.println("Total Emp Wage For Company " +emp.company + " is: " + emp.computeWage());
+        System.out.println("Total Emp Wage For Company " +emp1.company + " is: " + emp1.computeWage());
+      }
+
+}
+
+
 
